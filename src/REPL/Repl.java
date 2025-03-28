@@ -1,6 +1,6 @@
 package REPL;
 import Buffer.InputBuffer;
-import Enums.MetaCommandResult;
+
 import Enums.PrepareResult;
 import Helpers.MetaCommandHandler;
 import Helpers.StatementHandler;
@@ -29,8 +29,8 @@ public class Repl {
             String input = inputBuffer.getBuffer();
 
             if (input.startsWith(".")) {
-                MetaCommandResult result = MetaCommandHandler.doMetaCommand(input, inputBuffer);
-                if (result == MetaCommandResult.SUCCESS) {
+                PrepareResult result = MetaCommandHandler.doMetaCommand(input, inputBuffer);
+                if (result == PrepareResult.SUCCESS) {
                     continue;
                 } else {
                     System.out.println("Unrecognized command: " + input);
@@ -44,9 +44,6 @@ public class Repl {
             } else {
                 System.out.println("Unrecognized SQL command: " + input);
             }
-
-
-            //scanner.close();
         }
     }
 }
