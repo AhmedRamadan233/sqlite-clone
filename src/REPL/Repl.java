@@ -31,6 +31,7 @@ public class Repl {
             if (input.startsWith(".")) {
                 PrepareResult result = MetaCommandHandler.doMetaCommand(input, inputBuffer);
                 if (result == PrepareResult.SUCCESS) {
+                    System.out.println("Meta command processed successfully: " + input);
                     continue;
                 } else {
                     System.out.println("Unrecognized command: " + input);
