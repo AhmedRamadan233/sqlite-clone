@@ -3,10 +3,12 @@ package Strategy.Eloquent.MetaCommand;
 import Enums.PrepareResult;
 import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
-public class HelpCommandStrategy implements MetaCommandStrategyInterface {
+public class ExitCommand implements MetaCommandStrategyInterface {
     @Override
     public PrepareResult execute() {
-        System.out.println("Help");
+        System.out.println("Exiting...");
+        System.out.flush();
+        System.exit(0);
         return PrepareResult.SUCCESS;
     }
 }

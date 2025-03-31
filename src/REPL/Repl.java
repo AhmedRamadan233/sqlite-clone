@@ -1,7 +1,5 @@
 package REPL;
 import Buffer.InputBuffer;
-
-import Enums.PrepareResult;
 import Helpers.MetaCommandHandler;
 import Helpers.StatementHandler;
 
@@ -16,7 +14,6 @@ public class Repl {
         inputBuffer = new InputBuffer();
 
     }
-
     private void printPrompt() {
         System.out.print("db > ");
     }
