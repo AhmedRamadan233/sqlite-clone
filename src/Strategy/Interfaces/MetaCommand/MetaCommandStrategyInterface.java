@@ -2,6 +2,6 @@ package Strategy.Interfaces.MetaCommand;
 
 import Enums.PrepareResult;
 
-public interface MetaCommandInterface {
+public interface MetaCommandStrategyInterface {
     PrepareResult execute();
 }

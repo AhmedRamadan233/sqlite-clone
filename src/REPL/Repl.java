@@ -29,21 +29,9 @@ public class Repl {
             String input = inputBuffer.getBuffer();
 
             if (input.startsWith(".")) {
-                PrepareResult result = MetaCommandHandler.doMetaCommand(input, inputBuffer);
-                if (result == PrepareResult.SUCCESS) {
-                    System.out.println("Meta command processed successfully: " + input);
-                    continue;
-                } else {
-                    System.out.println("Unrecognized command: " + input);
-                    continue;
-                }
-            }
-            PrepareResult statementResult = StatementHandler.prepareStatement(input, inputBuffer);
-
-            if (statementResult == PrepareResult.SUCCESS) {
-                System.out.println("SQL command processed successfully: " + input);
-            } else {
-                System.out.println("Unrecognized SQL command: " + input);
+                 MetaCommandHandler.doMetaCommand(input, inputBuffer);
+            }else {
+                StatementHandler.prepareStatement(input, inputBuffer);
             }
         }
     }

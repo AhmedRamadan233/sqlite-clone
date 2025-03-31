@@ -2,7 +2,7 @@ package Strategy.Interfaces.Statement;
 
 import Enums.PrepareResult;
 
-public interface StatementStrategy {
+public interface StatementStrategyInterface {
 
     PrepareResult execute();
 }

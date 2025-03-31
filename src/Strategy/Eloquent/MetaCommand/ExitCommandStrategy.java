@@ -1,9 +1,9 @@
 package Strategy.Eloquent.MetaCommand;
 
 import Enums.PrepareResult;
-import Strategy.Interfaces.MetaCommand.MetaCommandInterface;
+import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
-public class ExitCommand implements MetaCommandInterface {
+public class ExitCommandStrategy implements MetaCommandStrategyInterface {
     @Override
     public PrepareResult execute() {
         System.out.println("Exiting...");

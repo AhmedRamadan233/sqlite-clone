@@ -1,11 +1,12 @@
 package Strategy.Eloquent.Statement;
 
 import Enums.PrepareResult;
-import Strategy.Interfaces.Statement.StatementStrategy;
+import Strategy.Interfaces.Statement.StatementStrategyInterface;
 
-public class UnrecognizedStatement implements StatementStrategy {
+public class UnrecognizedStatement implements StatementStrategyInterface {
     @Override
     public PrepareResult execute() {
-        return PrepareResult.UNRECOGNIZED_COMMAND;
+        System.out.println("UnrecognizedStatement");
+        return PrepareResult.SUCCESS;
     }
 }

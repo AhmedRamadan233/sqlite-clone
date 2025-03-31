@@ -1,9 +1,9 @@
 package Strategy.Eloquent.MetaCommand;
 
 import Enums.PrepareResult;
-import Strategy.Interfaces.MetaCommand.MetaCommandInterface;
+import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
-public class HelpCommand implements MetaCommandInterface {
+public class HelpCommandStrategy implements MetaCommandStrategyInterface {
     @Override
     public PrepareResult execute() {
         System.out.println("Help");

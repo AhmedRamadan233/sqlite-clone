@@ -1,13 +1,13 @@
 package Factory;
 
 import Strategy.Eloquent.Statement.*;
-import Strategy.Interfaces.Statement.StatementStrategy;
+import Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class StatementFactory {
-    private static final Map<String, StatementStrategy> STATEMENT_MAP = new HashMap<>();
+    private static final Map<String, StatementStrategyInterface> STATEMENT_MAP = new HashMap<>();
 
     static {
         registerStatement("SELECT", new SelectStatement());
@@ -17,7 +17,7 @@ public class StatementFactory {
         registerStatement("DROP", new DropStatement());
     }
 
-    public static StatementStrategy createStatement(String input) {
+    public static StatementStrategyInterface createStatement(String input) {
         if (input == null || input.isEmpty()) {
             return new UnrecognizedStatement();
         }
@@ -26,7 +26,7 @@ public class StatementFactory {
         return STATEMENT_MAP.getOrDefault(upperInput, new UnrecognizedStatement());
     }
 
-    public static void registerStatement(String command, StatementStrategy strategy) {
+    public static void registerStatement(String command, StatementStrategyInterface strategy) {
         STATEMENT_MAP.put(command.toUpperCase(), strategy);
     }
 }

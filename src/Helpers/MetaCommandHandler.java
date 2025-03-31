@@ -4,12 +4,12 @@ import Buffer.InputBuffer;
 
 import Enums.PrepareResult;
 import Factory.MetaCommandFactory;
-import Strategy.Interfaces.MetaCommand.MetaCommandInterface;
+import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
 public class MetaCommandHandler {
 
     public static PrepareResult doMetaCommand(String input, InputBuffer inputBuffer) {
-        MetaCommandInterface command = MetaCommandFactory.createMetaCommand(input);
+        MetaCommandStrategyInterface command = MetaCommandFactory.createMetaCommand(input);
         if (command != null) {
             return command.execute();
         }

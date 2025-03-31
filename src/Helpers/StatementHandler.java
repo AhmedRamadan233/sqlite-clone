@@ -2,13 +2,17 @@ package Helpers;
 
 import Buffer.InputBuffer;
 import Enums.PrepareResult;
+
 import Factory.StatementFactory;
-import Strategy.Interfaces.Statement.StatementStrategy;
+import Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 public class StatementHandler {
     public static PrepareResult prepareStatement(String input, InputBuffer inputBuffer) {
-        StatementStrategy strategy = StatementFactory.createStatement(input);
-        return strategy.execute();
+        StatementStrategyInterface strategy = StatementFactory.createStatement(input);
+        if (strategy != null) {
+            return strategy.execute();
+        }
+        return PrepareResult.UNRECOGNIZED_COMMAND;
     }
 
 }
