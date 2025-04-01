@@ -1,8 +1,8 @@
-import REPL.Repl;
+import Public.Index;
 
 public class Main {
     public static void main(String[] args) {
-        Repl replObject = new Repl();
+        Index replObject = new Index();
         replObject.start();
     }
 }

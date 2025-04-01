@@ -1,10 +1,9 @@
-package Factory;
+package App.Factory;
 
-import Strategy.Eloquent.MetaCommand.ExitCommand;
-import Strategy.Eloquent.MetaCommand.HelpCommand;
-import Strategy.Eloquent.MetaCommand.UnrecognizedCommand;
-import Strategy.Eloquent.Statement.UnrecognizedStatement;
-import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
+import App.Strategy.Eloquent.MetaCommand.ExitCommand;
+import App.Strategy.Eloquent.MetaCommand.HelpCommand;
+import App.Strategy.Eloquent.MetaCommand.UnrecognizedCommand;
+import App.Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 import java.util.logging.Logger;
 
 import java.util.HashMap;

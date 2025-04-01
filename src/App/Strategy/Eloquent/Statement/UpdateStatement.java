@@ -1,7 +1,7 @@
-package Strategy.Eloquent.Statement;
+package App.Strategy.Eloquent.Statement;
 
 import Enums.PrepareResult;
-import Strategy.Interfaces.Statement.StatementStrategyInterface;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 public class UpdateStatement implements StatementStrategyInterface {
     @Override

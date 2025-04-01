@@ -1,7 +1,7 @@
-package Factory;
+package App.Factory;
 
-import Strategy.Eloquent.Statement.*;
-import Strategy.Interfaces.Statement.StatementStrategyInterface;
+import App.Strategy.Eloquent.Statement.*;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 import java.util.HashMap;
 import java.util.Map;

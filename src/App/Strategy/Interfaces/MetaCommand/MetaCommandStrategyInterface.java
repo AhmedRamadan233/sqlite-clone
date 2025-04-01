@@ -1,4 +1,4 @@
-package Strategy.Interfaces.MetaCommand;
+package App.Strategy.Interfaces.MetaCommand;
 
 import Enums.PrepareResult;
 

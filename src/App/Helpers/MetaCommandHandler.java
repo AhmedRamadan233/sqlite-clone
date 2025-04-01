@@ -1,10 +1,10 @@
-package Helpers;
+package App.Helpers;
 
 import Buffer.InputBuffer;
 
 import Enums.PrepareResult;
-import Factory.MetaCommandFactory;
-import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
+import App.Factory.MetaCommandFactory;
+import App.Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
 public class MetaCommandHandler {
 

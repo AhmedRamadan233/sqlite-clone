@@ -1,16 +1,16 @@
-package REPL;
+package Public;
 import Buffer.InputBuffer;
 import Enums.PrepareResult;
-import Helpers.MetaCommandHandler;
-import Helpers.StatementHandler;
+import App.Helpers.MetaCommandHandler;
+import App.Helpers.StatementHandler;
 
 import java.util.Scanner;
 
-public class Repl {
+public class Index {
     private Scanner scanner;
     private InputBuffer inputBuffer;
 
-    public Repl() {
+    public Index() {
         scanner = new Scanner(System.in);
         inputBuffer = new InputBuffer();
 

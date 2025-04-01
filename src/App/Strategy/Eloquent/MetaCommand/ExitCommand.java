@@ -1,7 +1,7 @@
-package Strategy.Eloquent.MetaCommand;
+package App.Strategy.Eloquent.MetaCommand;
 
 import Enums.PrepareResult;
-import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
+import App.Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
 public class ExitCommand implements MetaCommandStrategyInterface {
     @Override

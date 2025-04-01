@@ -1,10 +1,10 @@
-package Helpers;
+package App.Helpers;
 
 import Buffer.InputBuffer;
 import Enums.PrepareResult;
 
-import Factory.StatementFactory;
-import Strategy.Interfaces.Statement.StatementStrategyInterface;
+import App.Factory.StatementFactory;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 public class StatementHandler {
     public static PrepareResult prepareStatement(String input, InputBuffer inputBuffer) {

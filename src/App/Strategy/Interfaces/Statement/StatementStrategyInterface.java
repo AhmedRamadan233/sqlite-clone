@@ -1,4 +1,4 @@
-package Strategy.Interfaces.Statement;
+package App.Strategy.Interfaces.Statement;
 
 import Enums.PrepareResult;
 
