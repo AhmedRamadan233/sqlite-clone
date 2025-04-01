@@ -2,5 +2,6 @@ package Enums;
 
 public enum PrepareResult {
     SUCCESS,
-    UNRECOGNIZED_COMMAND
+    UNRECOGNIZED_COMMAND,
+    EXIT
 }

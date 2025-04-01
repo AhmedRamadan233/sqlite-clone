@@ -7,6 +7,6 @@ public class UnrecognizedStatement implements StatementStrategyInterface {
     @Override
     public PrepareResult execute() {
         System.out.println("UnrecognizedStatement");
-        return PrepareResult.SUCCESS;
+        return PrepareResult.UNRECOGNIZED_COMMAND;
     }
 }

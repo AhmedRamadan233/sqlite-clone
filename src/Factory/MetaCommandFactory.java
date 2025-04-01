@@ -3,26 +3,51 @@ package Factory;
 import Strategy.Eloquent.MetaCommand.ExitCommand;
 import Strategy.Eloquent.MetaCommand.HelpCommand;
 import Strategy.Eloquent.MetaCommand.UnrecognizedCommand;
+import Strategy.Eloquent.Statement.UnrecognizedStatement;
 import Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
+import java.util.logging.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MetaCommandFactory {
-    private static final Map<String, MetaCommandStrategyInterface> COMMAND_MAP = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(MetaCommandFactory.class.getName());
+
+    private static final Map<String, MetaCommandStrategyInterface> SINGLETON_COMMAND_MAP = new HashMap<>();
+    private static final Map<String, Class<? extends MetaCommandStrategyInterface>> BIND_COMMAND_MAP = new HashMap<>();
+
 
     static {
-        registerMetaCommand(".EXIT", new ExitCommand());
-        registerMetaCommand(".HELP", new HelpCommand());
+        Singlton(".EXIT", new ExitCommand());
+        Singlton(".HELP", new HelpCommand());
     }
-    public static void registerMetaCommand(String command, MetaCommandStrategyInterface metaCommand) {
-        COMMAND_MAP.put(command.toUpperCase(), metaCommand);
-    }
+
     public static MetaCommandStrategyInterface createMetaCommand(String input) {
         if (input == null || input.isEmpty()) {
             return new UnrecognizedCommand();
         }
         String upperInput = input.toUpperCase().split(" ")[0];
-        return COMMAND_MAP.getOrDefault(upperInput, new UnrecognizedCommand());
+        if (SINGLETON_COMMAND_MAP.containsKey(upperInput)) {
+            return SINGLETON_COMMAND_MAP.get(upperInput);
+        }
+
+        if (BIND_COMMAND_MAP.containsKey(upperInput)) {
+            try {
+                return BIND_COMMAND_MAP.get(upperInput).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                LOGGER.severe("Error creating instance for command: " + upperInput + " - " + e.getMessage());
+                return new UnrecognizedCommand();
+            }
+        }
+
+        return new UnrecognizedCommand();
+    }
+
+
+    public static void Singlton(String command, MetaCommandStrategyInterface metaCommand) {
+        SINGLETON_COMMAND_MAP.put(command.toUpperCase(), metaCommand);
+    }
+    public static void Bind(String command, Class<? extends MetaCommandStrategyInterface> strategyClass) {
+        BIND_COMMAND_MAP.put(command.toUpperCase(), strategyClass);
     }
 }

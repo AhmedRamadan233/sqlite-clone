@@ -9,6 +9,6 @@ public class ExitCommand implements MetaCommandStrategyInterface {
         System.out.println("Exiting...");
         System.out.flush();
         System.exit(0);
-        return PrepareResult.SUCCESS;
+        return PrepareResult.EXIT;
     }
 }

@@ -5,16 +5,20 @@ import Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class StatementFactory {
-    private static final Map<String, StatementStrategyInterface> STATEMENT_MAP = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(StatementFactory.class.getName());
+
+    private static final Map<String, StatementStrategyInterface> SINGLETON_STATEMENT_MAP = new HashMap<>();
+    private static final Map<String, Class<? extends StatementStrategyInterface>> BIND_STATEMENTS_MAP = new HashMap<>();
 
     static {
-        registerStatement("SELECT", new SelectStatement());
-        registerStatement("INSERT", new InsertStatement());
-        registerStatement("UPDATE", new UpdateStatement());
-        registerStatement("DELETE", new DeleteStatement());
-        registerStatement("DROP", new DropStatement());
+        Singlton("INSERT", new InsertStatement());
+        Singlton("UPDATE", new UpdateStatement());
+        Singlton("DELETE", new DeleteStatement());
+        Singlton("DROP", new DropStatement());
+        Bind("SELECT", SelectStatement.class);
     }
 
     public static StatementStrategyInterface createStatement(String input) {
@@ -23,10 +27,28 @@ public class StatementFactory {
         }
 
         String upperInput = input.toUpperCase().split(" ")[0];
-        return STATEMENT_MAP.getOrDefault(upperInput, new UnrecognizedStatement());
+
+        if (SINGLETON_STATEMENT_MAP.containsKey(upperInput)) {
+            return SINGLETON_STATEMENT_MAP.get(upperInput);
+        }
+
+        if (BIND_STATEMENTS_MAP.containsKey(upperInput)) {
+            try {
+                return BIND_STATEMENTS_MAP.get(upperInput).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                LOGGER.severe("Error creating instance for statement: " + upperInput + " - " + e.getMessage());
+                return new UnrecognizedStatement();
+            }
+        }
+
+        return new UnrecognizedStatement();
     }
 
-    public static void registerStatement(String command, StatementStrategyInterface strategy) {
-        STATEMENT_MAP.put(command.toUpperCase(), strategy);
+    public static void Singlton(String command, StatementStrategyInterface strategy) {
+        SINGLETON_STATEMENT_MAP.put(command.toUpperCase(), strategy);
+    }
+
+    public static void Bind(String command, Class<? extends StatementStrategyInterface> strategyClass) {
+        BIND_STATEMENTS_MAP.put(command.toUpperCase(), strategyClass);
     }
 }

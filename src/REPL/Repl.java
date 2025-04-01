@@ -1,5 +1,6 @@
 package REPL;
 import Buffer.InputBuffer;
+import Enums.PrepareResult;
 import Helpers.MetaCommandHandler;
 import Helpers.StatementHandler;
 
@@ -24,11 +25,18 @@ public class Repl {
             printPrompt();
             inputBuffer.readInput(scanner);
             String input = inputBuffer.getBuffer();
-
+            PrepareResult result;
             if (input.startsWith(".")) {
-                 MetaCommandHandler.doMetaCommand(input, inputBuffer);
+                result =  MetaCommandHandler.doMetaCommand(input, inputBuffer);
             }else {
-                StatementHandler.prepareStatement(input, inputBuffer);
+                result =  StatementHandler.prepareStatement(input, inputBuffer);
+            }
+            if (result == PrepareResult.UNRECOGNIZED_COMMAND) {
+                System.out.println("Unrecognized command!");
+            }
+            if (result == PrepareResult.EXIT) {
+                System.out.println("Bye!");
+                break;
             }
         }
     }
