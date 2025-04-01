@@ -4,5 +4,5 @@ import Enums.PrepareResult;
 
 public interface StatementStrategyInterface {
 
-    PrepareResult execute();
+    PrepareResult execute(String input);
 }

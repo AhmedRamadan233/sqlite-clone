@@ -5,7 +5,7 @@ import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
 
 public class SelectStatement implements StatementStrategyInterface{
     @Override
-    public PrepareResult execute() {
+    public PrepareResult execute(String input) {
         System.out.println("SELECT");
         return PrepareResult.SUCCESS;
     }

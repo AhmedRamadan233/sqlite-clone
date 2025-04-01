@@ -10,7 +10,7 @@ public class StatementHandler {
     public static PrepareResult prepareStatement(String input, InputBuffer inputBuffer) {
         StatementStrategyInterface strategy = StatementFactory.createStatement(input);
         if (strategy != null) {
-            return strategy.execute();
+            return strategy.execute(input);
         }
         return PrepareResult.UNRECOGNIZED_COMMAND;
     }
