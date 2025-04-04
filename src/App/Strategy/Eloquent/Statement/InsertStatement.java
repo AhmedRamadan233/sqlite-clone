@@ -35,9 +35,9 @@ public class InsertStatement implements StatementStrategyInterface {
         }
     }
 
-    public static List<Row> getRows() {
-        return rows;
-    }
+//    public static List<Row> getRows() {
+//        return rows;
+//    }
 
 
 }
