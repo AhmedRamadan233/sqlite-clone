@@ -1,4 +1,6 @@
 package Public;
+import App.Database.Table;
+import App.Factory.StatementFactory;
 import Buffer.InputBuffer;
 import Enums.PrepareResult;
 import App.Helpers.MetaCommandHandler;
@@ -20,6 +22,9 @@ public class Index {
     }
 
     public void start() {
+        Table table = new Table();
+        StatementFactory.initialize(table);
+
         System.out.println("Welcome to Sqlite Clone!");
         while (true) {
             printPrompt();
@@ -29,7 +34,7 @@ public class Index {
             if (input.startsWith(".")) {
                 result =  MetaCommandHandler.doMetaCommand(input, inputBuffer);
             }else {
-                result =  StatementHandler.prepareStatement(input, inputBuffer);
+                result = StatementHandler.prepareStatement(input);
             }
             if (result == PrepareResult.UNRECOGNIZED_COMMAND) {
                 System.out.println("Unrecognized command!");

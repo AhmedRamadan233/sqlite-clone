@@ -1,5 +1,6 @@
 package App.Factory;
 
+import App.Database.Table;
 import App.Strategy.Eloquent.Statement.*;
 import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
 
@@ -9,16 +10,16 @@ import java.util.logging.Logger;
 
 public class StatementFactory {
     private static final Logger LOGGER = Logger.getLogger(StatementFactory.class.getName());
-
     private static final Map<String, StatementStrategyInterface> SINGLETON_STATEMENT_MAP = new HashMap<>();
     private static final Map<String, Class<? extends StatementStrategyInterface>> BIND_STATEMENTS_MAP = new HashMap<>();
 
-    static {
-        Singlton("INSERT", new InsertStatement());
+    public static void initialize(Table table) {
+        Singlton("INSERT", new InsertStatement(table));
+        Singlton("SELECT", new SelectStatement(table));
         Singlton("UPDATE", new UpdateStatement());
         Singlton("DELETE", new DeleteStatement());
         Singlton("DROP", new DropStatement());
-        Bind("SELECT", SelectStatement.class);
+//        Bind("SELECT", SelectStatement.class);
     }
 
     public static StatementStrategyInterface createStatement(String input) {
@@ -52,3 +53,4 @@ public class StatementFactory {
         BIND_STATEMENTS_MAP.put(command.toUpperCase(), strategyClass);
     }
 }
+
