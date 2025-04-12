@@ -8,7 +8,7 @@ import App.Strategy.Interfaces.MetaCommand.MetaCommandStrategyInterface;
 
 public class MetaCommandHandler {
 
-    public static PrepareResult doMetaCommand(String input, InputBuffer inputBuffer) {
+    public static PrepareResult doMetaCommand(String input) {
         MetaCommandStrategyInterface command = MetaCommandFactory.createMetaCommand(input);
         if (command != null) {
             return command.execute();

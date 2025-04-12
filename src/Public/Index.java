@@ -32,7 +32,7 @@ public class Index {
             String input = inputBuffer.getBuffer();
             PrepareResult result;
             if (input.startsWith(".")) {
-                result =  MetaCommandHandler.doMetaCommand(input, inputBuffer);
+                result =  MetaCommandHandler.doMetaCommand(input);
             }else {
                 result = StatementHandler.prepareStatement(input);
             }
