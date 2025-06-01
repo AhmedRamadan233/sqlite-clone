@@ -1,5 +1,6 @@
 package App.Factory;
 
+import App.Database.Table;
 import App.Strategy.Eloquent.MetaCommand.ExitCommand;
 import App.Strategy.Eloquent.MetaCommand.HelpCommand;
 import App.Strategy.Eloquent.MetaCommand.UnrecognizedCommand;
@@ -16,8 +17,8 @@ public class MetaCommandFactory {
     private static final Map<String, Class<? extends MetaCommandStrategyInterface>> BIND_COMMAND_MAP = new HashMap<>();
 
 
-    static {
-        Singlton(".EXIT", new ExitCommand());
+    public static void initialize(Table table) {
+        Singlton(".EXIT", new ExitCommand(table));
         Singlton(".HELP", new HelpCommand());
     }
 

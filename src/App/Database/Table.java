@@ -1,12 +1,17 @@
 package App.Database;
 
 public class Table {
+    private final Pager pager;
     private int numRows = 0;
-    private final byte[][] pages = new byte[Constants.TABLE_MAX_PAGES][];
+
+    public Table(Pager pager) {
+        this.pager = pager;
+    }
 
     public int getNumRows() {
         return numRows;
     }
+
 
     public void incrementNumRows() {
         numRows++;
@@ -14,6 +19,8 @@ public class Table {
 
     public byte[] rowSlot(int rowNum) {
         int pageNum = rowNum / Constants.ROWS_PER_PAGE;
+
+        byte[][] pages = pager.getPages();
         if (pages[pageNum] == null) {
             pages[pageNum] = new byte[Constants.PAGE_SIZE];
         }
@@ -22,7 +29,6 @@ public class Table {
         int byteOffset = rowOffset * Constants.ROW_SIZE;
 
         byte[] page = pages[pageNum];
-
         byte[] slot = new byte[Constants.ROW_SIZE];
         System.arraycopy(page, byteOffset, slot, 0, Constants.ROW_SIZE);
 
@@ -32,6 +38,7 @@ public class Table {
     public void writeRow(int rowNum, byte[] serializedRow) {
         int pageNum = rowNum / Constants.ROWS_PER_PAGE;
 
+        byte[][] pages = pager.getPages();
         if (pages[pageNum] == null) {
             pages[pageNum] = new byte[Constants.PAGE_SIZE];
         }
@@ -40,11 +47,16 @@ public class Table {
         int byteOffset = rowOffset * Constants.ROW_SIZE;
 
         byte[] page = pages[pageNum];
-
         System.arraycopy(serializedRow, 0, page, byteOffset, Constants.ROW_SIZE);
     }
 
-    public byte[][] getPages() {
-        return pages;
+    public Pager getPager() {
+        return pager;
     }
+
+    public int getRowsPerPage() {
+        return Constants.ROWS_PER_PAGE;
+    }
+
+
 }
