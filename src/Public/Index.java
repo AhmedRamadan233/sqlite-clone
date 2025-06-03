@@ -12,6 +12,7 @@ import App.Helpers.StatementHandler;
 import java.io.IOException;
 import java.util.Scanner;
 
+import App.Providers.StatementServiceProvider;
 
 
 public class Index {
@@ -31,7 +32,9 @@ public class Index {
         try {
             Pager pager = new Pager("myDatabase.txt");
             Table table = new Table(pager);
-            StatementFactory.initialize(table);
+            StatementServiceProvider.register(table);
+            StatementServiceProvider.boot();
+
             MetaCommandFactory.initialize(table);
 
             System.out.println("Welcome to Sqlite Clone!");
