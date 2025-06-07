@@ -1,0 +1,99 @@
+package App.Providers;
+import App.Container.StatementContainer;
+import App.Database.Table;
+import App.Strategy.Eloquent.Statement.*;
+import java.util.logging.Logger;
+
+public class StatementServiceProvider {
+    private static final Logger LOGGER = Logger.getLogger(StatementServiceProvider.class.getName());
+    public static void register(Table table) {
+        StatementContainer.Singlton("INSERT", new InsertStatement(table));
+        StatementContainer.Bind("SELECT", () -> new SelectStatement(table));
+    }
+    public static void boot() {
+        LOGGER.info("StatementServiceProvider booted. All statements registered.");
+    }
+}
+-------------------------
+package App.Container;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
+public class StatementContainer {
+    private static final Map<String, StatementStrategyInterface> singletonBindings = new HashMap<>();
+    private static final Map<String, Supplier<StatementStrategyInterface>> suppliers = new HashMap<>();
+    public static void Singlton(String command, StatementStrategyInterface strategy) {
+        singletonBindings.put(command.toUpperCase(), strategy);
+    }
+    public static void Bind(String command, Supplier<StatementStrategyInterface> supplier) {
+        suppliers.put(command.toUpperCase(), supplier);
+    }
+    public static StatementStrategyInterface resolve(String command) {
+        String key = command.toUpperCase().split(" ")[0];
+        if (singletonBindings.containsKey(key)) {
+            return singletonBindings.get(key);
+        }
+        if (suppliers.containsKey(key)) {
+            return suppliers.get(key).get();
+        }
+        return null;
+    }
+}
+--------------------------------------
+package App.Factory;
+
+import App.Container.StatementContainer;
+import App.Strategy.Eloquent.Statement.UnrecognizedStatement;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
+
+import java.util.logging.Logger;
+
+public class StatementFactory {
+    private static final Logger LOGGER = Logger.getLogger(StatementFactory.class.getName());
+
+    public static StatementStrategyInterface createStatement(String input) {
+        if (input == null || input.isEmpty()) {
+            return new UnrecognizedStatement();
+        }
+        try {
+            StatementStrategyInterface resolved = StatementContainer.resolve(input);
+            return resolved != null ? resolved : new UnrecognizedStatement();
+        } catch (Exception e) {
+            LOGGER.severe("Error resolving statement: " + input + " - " + e.getMessage());
+            return new UnrecognizedStatement();
+        }
+    }
+}
+---------------------
+انا عاوز اي
+عاوز احول ال
+        StatementContainer.Singlton("INSERT", new InsertStatement(table));
+reflection api
+ف بدل م استخدمها كدا
+        StatementContainer.Singlton("INSERT", new InsertStatement(table));
+استخدمها كدا
+StatementContainer.Singlton("INSERT", InsertStatement.class);
+و جوه مثود الا
+insert
+بقا استدهي اي
+حاجة
+package App.Strategy.Eloquent.Statement;
+
+import App.Database.Constants;
+import App.Database.Table;
+import App.Models.Row;
+import Enums.PrepareResult;
+import App.Strategy.Interfaces.Statement.StatementStrategyInterface;
+
+public class InsertStatement implements StatementStrategyInterface {
+    private final Table table;
+
+    public InsertStatement(Table table) {
+        this.table = table;
+    }
+
+فاهمني زي لارافيل كدا
+
+ركز اوي اوي

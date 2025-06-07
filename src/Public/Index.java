@@ -1,4 +1,5 @@
 package Public;
+import App.Container.StatementContainer;
 import App.Database.Pager;
 import App.Database.Table;
 import App.Factory.MetaCommandFactory;
@@ -32,8 +33,10 @@ public class Index {
         try {
             Pager pager = new Pager("myDatabase.txt");
             Table table = new Table(pager);
-            StatementServiceProvider.register(table);
+            StatementContainer.bindDependency(Table.class, table);
+            StatementServiceProvider.register();
             StatementServiceProvider.boot();
+
 
             MetaCommandFactory.initialize(table);
 
